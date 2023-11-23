@@ -7,7 +7,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import logging
 
-from llama_index import load_index_from_storage, StorageContext, set_global_service_context
+from llama_index import set_global_service_context
 
 
 src_path = Path(__file__.split('src')[0])
@@ -15,7 +15,7 @@ sys.path.append(src_path.as_posix())
 
 from src.utils.io import load_conf
 from src.readers.loader import load_documents
-from src.llm_core.indexing import instantiate_vector_summary_index, get_query_engine, store_index
+from src.llm_core.indexing import instantiate_vector_summary_index, store_index
 from src.llm_core.llm import instantiate_llm, create_service_context
 from src.llm_core.embbedings import create_embbeding
 
@@ -49,24 +49,6 @@ def run(model_config: Dict, data_paths: Dict, logger: logging):
 
         logger.info("STORE INDEX")
         store_index(vector_index, pth_vector_store)
-
-    elif pth_vector_store.exists() and len(os.listdir(pth_vector_store)) != 0:
-        logger.info("LOAD INDEX")
-        # rebuild storage context
-        storage_context = StorageContext.from_defaults(persist_dir=str(pth_vector_store))
-        # load index
-        vector_index = load_index_from_storage(storage_context)
-
-    logger.info("GET QUERY ENGINE")
-    query_engine = get_query_engine(vector_index, service_context, model_config)
-
-    logger.info("QUERYING")
-    test_answer = query_engine.query("Explique moi l'arrêt Casanova")
-    test_answer3 = query_engine.query("Explique moi le CE Morsang sur Orge 1995")
-    # api test Explique moi le CE Morsang sur Orge 1995
-
-    test_answer.print_response_stream()
-    test_answer3.print_response_stream()
 
 
 if __name__ == "__main__":
