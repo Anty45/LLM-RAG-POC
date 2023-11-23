@@ -2,7 +2,10 @@
 
 ---
 
-[![Watch the video](./docs/illustration/llama.png)](./docs/illustration/rag-demo-short.mp4)
+[![Watch the video](./docs/illustration/llama.png)]()
+
+https://github.com/Anty45/LLM-RAG-POC/assets/43836758/e377a6e6-d16e-4532-a7de-a989e4f9b6a4
+
 ## RAG 
 This project is an example of how to pratically create a [retrieval augmented generation](https://stackoverflow.blog/2023/10/18/retrieval-augmented-generation-keeping-llms-relevant-and-current/) (RAG) pipeline using an open-source LLM. We choose
 [LlaMa 2 ](https://ai.meta.com/llama/) for the sake of the demonstration.
