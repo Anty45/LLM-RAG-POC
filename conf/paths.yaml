@@ -1,0 +1,6 @@
+# Ressource folder
+law_folder: ressources/data/raw/law
+
+# files
+vector_store: ressources/vectorization/
+
