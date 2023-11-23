@@ -8,13 +8,13 @@ https://github.com/Anty45/LLM-RAG-POC/assets/43836758/e377a6e6-d16e-4532-a7de-a9
 
 ## Install
 
-Please create a conda environment then : 
+Please create a conda environment, activate it then : 
 
 ```
 pip install -r requirements.txt
 ```
 
-:warning: For this project we using the python binding for [llama.cpp](https://github.com/abetlen/llama-cpp-python).
+:warning: For this project we are using the python binding for [llama.cpp](https://github.com/abetlen/llama-cpp-python).
 
 To install it on Mac M1 (witch is what i use on this POC) : 
 > ```CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python --no-cache-dir```
