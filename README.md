@@ -1,4 +1,4 @@
-# RAG on French Law documents behind a FastAPI backend
+# RAG on French Law documents using open-source LLM behind a FastAPI backend
 
 ---
 
