@@ -2,5 +2,5 @@
 law_folder: ressources/data/raw/law
 
 # files
-vector_store: ressources/vectorization/vigogne-2-7b-chat.Q4_K_S.gguf
+vector_store: ressources/vectorization/vigogne-2-7b-chat.Q5_K_M.gguf
 

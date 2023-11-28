@@ -16,5 +16,7 @@ def question_answering(request: Request, question: Question = Depends()):
     query_engine = request.state.query_engine
     if question.text is None or question.text.strip() == "":
         return {"answer": "Ask a question"}
-    answer = query_engine.query(question.text)
-    return {"answer": answer.print_response_stream()}
+    answer = str(query_engine.query(question.text))
+    if answer is None or answer == "":
+        return {"answer" : "Je n'ai pas compris votre question"}
+    return {"answer": answer.strip()}

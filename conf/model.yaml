@@ -1,8 +1,8 @@
 # llm model
 llm_type: "llamacpp"
 llm_openai_model: "gpt-3.5-turbo"
-llm_llama_model_url: "https://huggingface.co/TheBloke/Vigogne-2-7B-Chat-GGUF/resolve/main/vigogne-2-7b-chat.Q4_K_S.gguf"
-llm_llama_path: ressources/llm_model/vigogne-2-7b-chat.Q4_K_S.gguf
+llm_llama_model_url: "https://huggingface.co/TheBloke/Vigogne-2-7B-Chat-GGUF/resolve/main/vigogne-2-7b-chat.Q5_K_M.gguf"
+llm_llama_path: ressources/llm_model/vigogne-2-7b-chat.Q5_K_M.gguf
 
 # llm params
 model_temperature : 0.7
