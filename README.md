@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 :warning: For this project we are using the python binding for [llama.cpp](https://github.com/abetlen/llama-cpp-python).
 
-To install it on Mac M1 (witch is what i use on this POC) : 
+To install it on Mac M1 (which is what i use on this POC) : 
 > ```CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python --no-cache-dir```
 
 On Windows you can do 

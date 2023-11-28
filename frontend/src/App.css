@@ -1,0 +1,84 @@
+.App {
+    background-color: yellow;
+    height:100vh;
+    text-align: center;
+}
+
+
+.App-search-bar-component {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.App-llm-answer-bar-component {
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.App-search-bar {
+    padding: 10px;
+    width: 45ch;
+    max-width: 100%;
+    line-height: 2.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    text-align: center;
+    resize: none;
+}
+
+.App-header {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.App-submit-btn {
+    position: fixed;
+    top: 59%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Anek Malayalam', sans-serif;
+    background: black;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    color: #ffffff;
+    min-width: 200px;
+    min-height: 36px;
+    cursor: pointer;
+    outline: none;
+}
+.App-submit-btn:disabled {
+  background: #e7e8e9;
+  color: #9fa3a9;
+  cursor: not-allowed;
+}
+
+.App-submit-spinner {
+  animation-name: spin;
+  animation-duration: 500ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+s
+
+.App-link {
+  color: #61dafb;
+}
+
