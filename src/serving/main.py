@@ -1,8 +1,10 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from llama_index import set_global_service_context, load_index_from_storage, StorageContext
 from pathlib import Path
 import sys
+
 
 src_path = Path(__file__.split("src")[0])  # change that to serving
 sys.path.append(src_path.as_posix())
@@ -10,6 +12,7 @@ sys.path.append(src_path.as_posix())
 from src.llm_core.llm import instantiate_llm, create_service_context
 from src.llm_core.embbedings import create_embbeding
 from src.llm_core.indexing import get_query_engine
+from src.serving.global_config import CLIENT_ORIGINS
 from src.utils.io import load_conf
 from qa.routers import qa_router
 
@@ -34,6 +37,14 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=CLIENT_ORIGINS,
+    allow_credentials=True,
+    allow_headers=["*"],
+)
+
 app.include_router(qa_router)
 
 
