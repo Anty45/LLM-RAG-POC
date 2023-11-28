@@ -38,9 +38,9 @@ def run(model_config: Dict, data_paths: Dict, logger: logging):
 
     set_global_service_context(service_context)
 
-    pth_vector_store = Path(src_path / data_paths["vector_store"])
+    pth_vector_store = Path(src_path / data_paths["vector_store"] / model_config["llm_llama_path"].split("/")[-1])
     if (pth_vector_store.exists() and len(os.listdir(pth_vector_store)) == 0) \
-            or (not pth_vector_store.exists()):  # if the path do not exists create it
+            or (not pth_vector_store.exists()) or model_config["force_indexing"]:  # if the path do not exists create it
 
         pth_vector_store.mkdir(exist_ok=True)
 
