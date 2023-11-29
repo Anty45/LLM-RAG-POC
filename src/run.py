@@ -13,11 +13,11 @@ from llama_index import set_global_service_context
 src_path = Path(__file__.split('src')[0])
 sys.path.append(src_path.as_posix())
 
-from src.utils.io import load_conf
-from src.readers.loader import load_documents
-from src.llm_core.indexing import instantiate_vector_summary_index, store_index
-from src.llm_core.llm import instantiate_llm, create_service_context
-from src.llm_core.embbedings import create_embbeding
+from src.scripts.utils.io import load_conf
+from src.scripts.readers.loader import load_documents
+from src.scripts.llm_core.indexing import instantiate_vector_summary_index, store_index
+from src.scripts.llm_core.llm import instantiate_llm, create_service_context
+from src.scripts.llm_core.embbedings import create_embbeding
 
 load_dotenv()
 
@@ -38,7 +38,7 @@ def run(model_config: Dict, data_paths: Dict, logger: logging):
 
     set_global_service_context(service_context)
 
-    pth_vector_store = Path(src_path / data_paths["vector_store"] / model_config["llm_llama_path"].split("/")[-1])
+    pth_vector_store = Path(src_path / data_paths["vector_store"])
     if (pth_vector_store.exists() and len(os.listdir(pth_vector_store)) == 0) \
             or (not pth_vector_store.exists()) or model_config["force_indexing"]:  # if the path do not exists create it
 
