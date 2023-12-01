@@ -1,9 +1,11 @@
+from typing import Optional
+
 from llama_index.llms import OpenAI, LlamaCPP
 from llama_index import ServiceContext
 from llama_index.llms.llama_utils import messages_to_prompt, completion_to_prompt
 
 
-def instantiate_llm(model_config, src_path):
+def instantiate_llm(model_config: dict, model_pth: Optional):
     if model_config["llm_type"] == "llamacpp":
         llm = LlamaCPP(
             model_url=model_config["llm_llama_model_url"],

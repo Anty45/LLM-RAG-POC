@@ -13,11 +13,11 @@ from llama_index import set_global_service_context
 src_path = Path(__file__.split('src')[0])
 sys.path.append(src_path.as_posix())
 
-from src.scripts.utils.io import load_conf
-from src.scripts.readers.loader import load_documents
-from src.scripts.llm_core.indexing import instantiate_vector_summary_index, store_index
-from src.scripts.llm_core.llm import instantiate_llm, create_service_context
-from src.scripts.llm_core.embbedings import create_embbeding
+from src.utils.io import load_conf
+from src.readers.loader import load_documents
+from src.llm_core.indexing import instantiate_vector_summary_index, store_index
+from src.llm_core.llm import instantiate_llm, create_service_context
+from src.llm_core.embbedings import create_embbeding
 
 load_dotenv()
 
