@@ -24,8 +24,9 @@ text_qa_template: 1
 chat_mode: 'condense_question'
 
 
-# Force indexing
+# Force
 force_indexing : 1
+start_qa_pair_gen: 0
 
 # evaluation
 chunk_questions_to_generate : 2
