@@ -1,12 +1,15 @@
 from pathlib import Path
+from typing import Optional, List
 
-from llama_index import VectorStoreIndex, SummaryIndex
+from llama_index import VectorStoreIndex, SummaryIndex, Document
+from llama_index.chat_engine.types import BaseChatEngine
+from llama_index.core import BaseQueryEngine
 from llama_index.prompts import PromptTemplate
 
 from prompts import ZERO_SHOT_PROMPT
 
 
-def instantiate_vector_summary_index(documents, service_context):
+def instantiate_vector_summary_index(documents: List[Document], service_context):
     vector_index = VectorStoreIndex.from_documents(documents, service_context=service_context)
     summary_index = SummaryIndex.from_documents(documents, service_context=service_context)
     return vector_index, summary_index
@@ -16,8 +19,8 @@ def store_index(vector_store: VectorStoreIndex, pth_vector_store: Path):
     vector_store.storage_context.persist(pth_vector_store)
 
 
-def get_query_engine(vector_index, service_context, model_config):
-    if model_config["text_qa_template"]:
+def get_query_engine(vector_index, service_context, model_config) -> Optional[BaseQueryEngine, BaseChatEngine]:
+    if model_config["tasks"]["qa"]:
         query_engine = vector_index.as_query_engine(
             text_qa_template=ZERO_SHOT_PROMPT,
             service_context=service_context,
