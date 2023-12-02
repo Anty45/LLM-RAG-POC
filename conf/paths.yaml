@@ -1,6 +1,8 @@
 # Ressource folder
 law_folder: ressources/data/raw/law
+test_set: ressources/data/evaluation/synthetic
 
 # files
-vector_store: ressources/vectorization/vigogne-2-7b-chat.Q5_K_M.gguf
+vector_store: ressources/vectorization/Q5_K_M
+test_set_name : test_set.csv
 
