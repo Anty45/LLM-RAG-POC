@@ -1,2 +1,6 @@
 /.env
 /src/serving/.sandbox_env
+__pycache__
+src/llm_core/__pycache__/
+*.py[cod]
+*$py.class
