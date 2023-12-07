@@ -25,7 +25,9 @@ def run(path_conf: dict, model_conf: dict):
     # Format data
     law_docs = load_documents(src_path / path_conf["law_folder"])
     law_docs_cleaned = clean_docs(law_docs)
-    nodes = build_nodes(law_docs_cleaned, model_conf["node_chunk_size"])
+
+    doc_of_interest = [doc for doc in law_docs_cleaned if doc.metadata["section"] == "arrets"]
+    nodes = build_nodes(doc_of_interest, model_conf["node_chunk_size"])
 
     # Instantiate llm
     llm = instantiate_llm(model_conf, src_path / model_conf["llm_llama_path"])
