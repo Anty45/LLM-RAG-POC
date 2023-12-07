@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import List
 
-from llama_index import SimpleDirectoryReader, Document
+from llama_index import Document, SimpleDirectoryReader
 from llama_index.node_parser import SimpleNodeParser
 from llama_index.schema import BaseNode
 

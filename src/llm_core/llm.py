@@ -1,15 +1,24 @@
 from typing import Optional
 
-from llama_index.llms import LlamaCPP
 from llama_index import ServiceContext
-from llama_index.llms.llama_utils import messages_to_prompt, completion_to_prompt
+from llama_index.llms import LlamaCPP
+from llama_index.llms.llama_utils import completion_to_prompt, messages_to_prompt
 
 
 def instantiate_llm(model_config: dict, model_pth: Optional):
-    conf_key = ["llm_type", "llm_llama_model_url", "model_temperature", "max_new_tokens", "n_gpu_layers", "verbose"]
+    conf_key = [
+        "llm_type",
+        "llm_llama_model_url",
+        "model_temperature",
+        "max_new_tokens",
+        "n_gpu_layers",
+        "verbose",
+    ]
     for k in conf_key:
         if k not in model_config:
-            raise KeyError(f"{k} is a required key for llm instantiation. Please upload configuration")
+            raise KeyError(
+                f"{k} is a required key for llm instantiation. Please upload configuration"
+            )
 
     if "llamacpp" != model_config["llm_type"]:
         raise ValueError("We only support llamacpp as backend for the moment")

@@ -1,7 +1,7 @@
 from pathlib import Path
-from typing import Optional, List, Union
+from typing import List, Optional, Union
 
-from llama_index import VectorStoreIndex, SummaryIndex, Document
+from llama_index import Document, SummaryIndex, VectorStoreIndex
 from llama_index.chat_engine.types import BaseChatEngine
 from llama_index.core import BaseQueryEngine
 
@@ -18,18 +18,18 @@ def store_index(vector_store: VectorStoreIndex, pth_vector_store: Path):
     vector_store.storage_context.persist(pth_vector_store)
 
 
-def get_query_engine(vector_index, service_context, model_config) -> Optional[Union[BaseQueryEngine, BaseChatEngine]]:
+def get_query_engine(
+    vector_index, service_context, model_config
+) -> Optional[Union[BaseQueryEngine, BaseChatEngine]]:
     if model_config["tasks"]["qa"]:
         query_engine = vector_index.as_query_engine(
             text_qa_template=ZERO_SHOT_PROMPT,
             service_context=service_context,
-            streaming=True
+            streaming=True,
         )
     else:
         query_engine = vector_index.as_chat_engine(
-            chat_mode=model_config["chat_mode"],
-            verbose=True,
-            streaming=True
+            chat_mode=model_config["chat_mode"], verbose=True, streaming=True
         )
 
     return query_engine

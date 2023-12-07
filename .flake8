@@ -1,0 +1,13 @@
+[flake8]
+ignore = E211, E999, F401, F821, W503, E501
+extend-ignore = E203
+exclude =
+    .git,
+    __pycache__,
+    docs/source/conf.py,
+    old,
+    build,
+    dist
+    venv
+   ./frontend/node_modules/
+max-complexity = 10

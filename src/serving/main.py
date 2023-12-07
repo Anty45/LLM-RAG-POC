@@ -1,20 +1,25 @@
+import sys
+from contextlib import asynccontextmanager
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from contextlib import asynccontextmanager
-from llama_index import set_global_service_context, load_index_from_storage, StorageContext
-from pathlib import Path
-import sys
-
+from llama_index import (
+    StorageContext,
+    load_index_from_storage,
+    set_global_service_context,
+)
+from qa.routers import qa_router
 
 src_path = Path(__file__.split("src")[0])
 sys.path.append(src_path.as_posix())
 
-from src.llm_core.llm import instantiate_llm, create_service_context
-from src.llm_core.embbedings import create_embbeding
-from src.llm_core.indexing import get_query_engine
-from src.serving.global_config import CLIENT_ORIGINS
-from src.utils.io import load_conf
-from qa.routers import qa_router
+
+from src.llm_core.embbedings import create_embbeding  # noqa
+from src.llm_core.indexing import get_query_engine  # noqa
+from src.llm_core.llm import create_service_context, instantiate_llm  # noqa
+from src.serving.global_config import CLIENT_ORIGINS  # noqa
+from src.utils.io import load_conf  # noqa
 
 
 @asynccontextmanager
@@ -33,7 +38,9 @@ async def lifespan(app: FastAPI):
     vector_index = load_index_from_storage(storage_context)
     query_engine = get_query_engine(vector_index, service_context, model_conf)
 
-    yield {"query_engine": query_engine, }
+    yield {
+        "query_engine": query_engine,
+    }
 
 
 app = FastAPI(lifespan=lifespan)

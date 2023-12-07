@@ -1,27 +1,25 @@
-import os
-import openai
-import sys
-
-from typing import Dict
-from pathlib import Path
-from dotenv import load_dotenv
 import logging
+import os
+import sys
+from pathlib import Path
+from typing import Dict
 
+import openai
+from dotenv import load_dotenv
 from llama_index import set_global_service_context
 
-
-src_path = Path(__file__.split('src')[0])
+src_path = Path(__file__.split("src")[0])
 sys.path.append(src_path.as_posix())
 
-from src.utils.io import load_conf
-from src.readers.loader import load_documents
-from src.llm_core.indexing import instantiate_vector_summary_index, store_index
-from src.llm_core.llm import instantiate_llm, create_service_context
-from src.llm_core.embbedings import create_embbeding
+from src.llm_core.embbedings import create_embbeding  # noqa
+from src.llm_core.indexing import instantiate_vector_summary_index, store_index  # noqa
+from src.llm_core.llm import create_service_context, instantiate_llm  # noqa
+from src.readers.loader import load_documents  # noqa
+from src.utils.io import load_conf  # noqa
 
 load_dotenv()
 
-OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
 
@@ -30,7 +28,7 @@ def run(model_config: Dict, data_paths: Dict, logger: logging):
     law_docs = load_documents(src_path / data_paths["law_folder"])
 
     logger.info("INSTANTIATE LLM")
-    llm = instantiate_llm(model_config, src_path / model_conf['llm_llama_path'])
+    llm = instantiate_llm(model_config, src_path / model_conf["llm_llama_path"])
 
     logger.info("EMBBEDING CREATION")
     embbeding = create_embbeding(model_config)
@@ -39,9 +37,11 @@ def run(model_config: Dict, data_paths: Dict, logger: logging):
     set_global_service_context(service_context)
 
     pth_vector_store = Path(src_path / data_paths["vector_store"])
-    if (pth_vector_store.exists() and len(os.listdir(pth_vector_store)) == 0) \
-            or (not pth_vector_store.exists()) or model_config["force_indexing"]:  # if the path do not exists create it
-
+    if (
+        (pth_vector_store.exists() and len(os.listdir(pth_vector_store)) == 0)
+        or (not pth_vector_store.exists())
+        or model_config["force_indexing"]
+    ):  # if the path do not exists create it
         pth_vector_store.mkdir(exist_ok=True)
 
         logger.info("INDEXING")
