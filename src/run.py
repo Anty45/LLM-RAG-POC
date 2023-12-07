@@ -30,7 +30,7 @@ def run(model_config: Dict, data_paths: Dict, logger: logging):
     law_docs = load_documents(src_path / data_paths["law_folder"])
 
     logger.info("INSTANTIATE LLM")
-    llm = instantiate_llm(model_config, src_path)
+    llm = instantiate_llm(model_config, src_path / model_conf['llm_llama_path'])
 
     logger.info("EMBBEDING CREATION")
     embbeding = create_embbeding(model_config)
