@@ -19,8 +19,10 @@ node_chunk_size: 950
 embbeding: "dangvantuan/sentence-camembert-base"
 
 
-# chat prompt
-text_qa_template: 1
+# Task
+tasks:
+  qa : 1
+  chat: 0
 chat_mode: 'condense_question'
 
 

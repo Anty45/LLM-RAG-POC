@@ -6,14 +6,14 @@ from pathlib import Path
 import sys
 
 
-src_path = Path(__file__.split("src")[0])  # change that to serving
+src_path = Path(__file__.split("src")[0])
 sys.path.append(src_path.as_posix())
 
-from src.scripts.llm_core.llm import instantiate_llm, create_service_context
-from src.scripts.llm_core.embbedings import create_embbeding
-from src.scripts.llm_core.indexing import get_query_engine
+from src.llm_core.llm import instantiate_llm, create_service_context
+from src.llm_core.embbedings import create_embbeding
+from src.llm_core.indexing import get_query_engine
 from src.serving.global_config import CLIENT_ORIGINS
-from src.scripts.utils.io import load_conf
+from src.utils.io import load_conf
 from qa.routers import qa_router
 
 
@@ -50,4 +50,4 @@ app.include_router(qa_router)
 
 @app.get("/")
 def entrypoint():
-    return {"s": "hello"}
+    return {"awesome test": "hello"}

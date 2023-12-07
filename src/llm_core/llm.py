@@ -6,21 +6,28 @@ from llama_index.llms.llama_utils import messages_to_prompt, completion_to_promp
 
 
 def instantiate_llm(model_config: dict, model_pth: Optional):
-    if model_config["llm_type"] == "llamacpp":
+    conf_key = ["llm_type", "llm_llama_model_url", "model_temperature", "max_new_tokens", "n_gpu_layers", "verbose"]
+    for k in conf_key:
+        if k not in model_config:
+            raise KeyError(f"{k} is a required key for llm instantiation. Please upload configuration")
+
+    if "llamacpp" != model_config["llm_type"]:
+        raise ValueError("We only support llamacpp as backend for the moment")
+
+    else:
         llm = LlamaCPP(
             model_url=model_config["llm_llama_model_url"],
             model_path=str(model_pth),
             temperature=model_config["model_temperature"],
             max_new_tokens=model_config["max_new_tokens"],
             model_kwargs={
-                #"low_cpu_mem_usage": model_config["low_cpu_mem_usage"],
                 "n_gpu_layers": model_config["n_gpu_layers"],
             },
             messages_to_prompt=messages_to_prompt,
             completion_to_prompt=completion_to_prompt,
             verbose=model_config["verbose"],
         )
-    # TODO: take care of the case where llm_type does not correspond to anything
+
     return llm
 
 
