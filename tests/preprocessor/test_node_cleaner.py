@@ -45,4 +45,4 @@ def test_remove_header_arret(arret):
 def test_add_doc_section_to_metadata_arret(arret):
     add_doc_section_to_metadata(arret)
     assert "section" in arret.metadata
-    assert arret.metadata["section"] == "arret"
+    assert arret.metadata["section"] == "arrets"
